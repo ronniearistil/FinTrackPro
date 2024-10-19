@@ -1,19 +1,21 @@
-import React from 'react';
+// ExpenseDashboard.jsx
+import React, { useContext } from 'react';
+import { ProjectContext } from './ProjectContext';
+import ExpenseCard from './ExpenseCard';
+import ListContainer from './ListContainer';
 
-const ExpenseDashboard = ({ expenses }) => {
+const ExpenseDashboard = () => {
+  const { expenses } = useContext(ProjectContext);
+
   return (
-    <div className="expense-dashboard">
-      {expenses.map((expense) => (
-        <div key={expense.id} className="expense-card">
-          <h3>{expense.name}</h3>
-          <p>Amount: ${expense.amount}</p>
-          <p>Project ID: {expense.projectId}</p>
-        </div>
-      ))}
-    </div>
+    <ListContainer
+      title="Expenses List"
+      items={expenses}
+      renderItem={(expense) => <ExpenseCard key={expense.id} expense={expense} />}
+      emptyMessage="No expenses found."
+    />
   );
 };
 
 export default ExpenseDashboard;
-
 
